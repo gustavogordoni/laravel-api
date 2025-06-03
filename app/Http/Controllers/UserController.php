@@ -10,12 +10,14 @@ use App\Http\Requests\StoreUpdateUserRequest;
 
 class UserController extends Controller
 {
+    public function __construct(protected User $repository) {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::paginate();
+        $users = $this->repository->paginate();
 
         return UserResource::collection($users);
     }
@@ -36,7 +38,7 @@ class UserController extends Controller
         $data = $request->validated();
         $data['password'] = bcrypt($request->password);
 
-        $user = User::create($data);
+        $user = $this->repository->create($data);
 
         return new UserResource($user);
     }
@@ -46,11 +48,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // $user = User::find($id);
-        // $user = User::where('id', '=', $id)->first();
-        
-        $user = User::findOrFail($id);
-        
+        // $user = $this->repository->find($id);
+        // $user = $this->repository->where('id', '=', $id)->first();
+
+        $user = $this->repository->findOrFail($id);
+
         return new UserResource($user);
     }
 
@@ -67,12 +69,12 @@ class UserController extends Controller
      */
     public function update(StoreUpdateUserRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
-        if($request->password)
+        if ($request->password)
             $data['password'] = bcrypt($request->password);
 
-        $user = User::findOrFail($id);
+        $user = $this->repository->findOrFail($id);
 
         $user->update($data);
 
@@ -84,7 +86,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->repository->findOrFail($id);
         $user->delete();
 
         return response()->json([], Response::HTTP_NO_CONTENT);
