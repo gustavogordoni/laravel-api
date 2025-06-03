@@ -1,28 +1,35 @@
-# Setup Docker Laravel
+# Laravel API REST
 
-### Passo a passo
+Este projeto é uma API REST desenvolvida com Laravel 12 e PHP 8.4. Ele foi criado como parte do meu aprendizado sobre o funcionamento de APIs usando o framework Laravel.
 
-### Clone Repositório
+A base do projeto foi inspirada no vídeo [**"Introdução à API Rest com Laravel 10"**](https://www.youtube.com/watch?v=AO3gug_3DRs) do canal [**Especializa TI**](https://www.youtube.com/@EspecializaTI), utilizando como referência o [repositório original](https://github.com/especializati/laravel-10-rest-api), mantido por [Carlos Ferreira](https://github.com/carlosfgti).
+
+---
+
+## Endpoints
+
+A API conta com endpoints RESTful para a entidade `User`, incluindo as operações de listagem, criação, visualização, atualização e remoção de usuários, implementadas com `Route::apiResource`.
+
+| Método | Endpoint          | Descrição                                                                |
+| ------ | ----------------- | ------------------------------------------------------------------------ |
+| GET    | `/api/users`      | Lista todos os usuários com paginação. Retorna uma coleção de usuários.  |
+| GET    | `/api/users/{id}` | Retorna os dados de um usuário específico, identificado por seu ID.      |
+| POST   | `/api/users`      | Cria um novo usuário com os dados fornecidos no corpo da requisição.     |
+| PATCH  | `/api/users/{id}` | Atualiza parcialmente os dados de um usuário específico.                 |
+| DELETE | `/api/users/{id}` | Remove um usuário específico do sistema.                                 |
+
+---
+
+## Instalação
+
+### Clone o repositório
 
 ```sh
-git clone -b laravel-12-with-php8.4 https://github.com/gustavogordoni/setup-docker-laravel.git
+git clone -b laravel-12-with-php8.4 https://github.com/gustavogordoni/laravel-api.git
+cd laravel-api
 ```
 
-### Clone os Arquivos do Laravel
-```sh
-git clone https://github.com/laravel/laravel.git app_laravel
-```
-
-### Copie os arquivos docker-compose.yml, Dockerfile e o diretório docker/ para o seu projeto
-```sh
-cp -rf setup-docker-laravel/* app_laravel/
-```
-
-```sh
-cd app_laravel
-```
-
-### Crie o Arquivo .env
+### Crie o arquivo `.env`
 
 ```sh
 cp .env.example .env
@@ -40,44 +47,14 @@ docker compose up -d
 docker compose exec app bash
 ```
 
-### Instale as dependências do Laravel
+### Instale as dependências e configure o Laravel
 
 ```sh
 composer install
-```
-
-### Gere a chave da aplicação
-
-```sh
 php artisan key:generate
-```
-
-### Rode as migrations
-
-```sh
 php artisan migrate
+php artisan db:seed
 ```
-
-<!-- 
-### Rode as seeds
-```sh
-php artisan db:seed 
-```
--->
-
-### Instale as dependências do frontend
-
-```sh
-npm install
-```
-
-### Compile os assets com Vite
-
-```sh
-npm run build
-```
-
-> Se estiver desenvolvendo, use `npm run dev` para recompilar automaticamente ao salvar os arquivos.
 
 ---
 
