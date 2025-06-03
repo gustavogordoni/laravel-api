@@ -12,11 +12,11 @@ A API conta com endpoints RESTful para a entidade `User`, incluindo as operaçõ
 
 | Método | Endpoint          | Descrição                                                                |
 | ------ | ----------------- | ------------------------------------------------------------------------ |
-| GET    | `/api/users`      | Lista todos os usuários com paginação. Retorna uma coleção de usuários.  |
-| GET    | `/api/users/{id}` | Retorna os dados de um usuário específico, identificado por seu ID.      |
-| POST   | `/api/users`      | Cria um novo usuário com os dados fornecidos no corpo da requisição.     |
-| PATCH  | `/api/users/{id}` | Atualiza parcialmente os dados de um usuário específico.                 |
-| DELETE | `/api/users/{id}` | Remove um usuário específico do sistema.                                 |
+| GET    | `/users`      | Lista todos os usuários com paginação. Retorna uma coleção de usuários.  |
+| GET    | `/users/{id}` | Retorna os dados de um usuário específico, identificado por seu ID.      |
+| POST   | `/users`      | Cria um novo usuário com os dados fornecidos no corpo da requisição.     |
+| PATCH  | `/users/{id}` | Atualiza parcialmente os dados de um usuário específico.                 |
+| DELETE | `/users/{id}` | Remove um usuário específico do sistema.                                 |
 
 ---
 
